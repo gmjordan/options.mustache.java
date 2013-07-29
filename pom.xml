@@ -9,6 +9,18 @@
 	<description>simple option setup to handle form elements like radio, checkbox and select</description>
 	<url>http://maven.apache.org</url>
 
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:git:git@github.com:gmjordan/options.mustache.java.git</connection>
+		<url>scm:git:git@github.com:gmjordan/options.mustache.java.git</url>
+		<developerConnection>scm:git:git@github.com:gmjordan/options.mustache.java.git</developerConnection>
+	</scm>
 	<properties>
 		<jdk.version>1.6</jdk.version>
 	</properties>
