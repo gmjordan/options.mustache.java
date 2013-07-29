@@ -13,17 +13,41 @@ import java.util.Map.Entry;
 import com.github.gmjordan.mustache.java.annotation.MustacheOption;
 import com.github.gmjordan.mustache.java.annotation.MustacheOptionKV;
 
+/**
+ * The Class OptionList.
+ */
 public class OptionList implements Serializable {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The options. */
 	private ArrayList<Option> options = null;
 
+	/**
+	 * Gets the option list.
+	 * 
+	 * @param storedOptionValOrVals The string or string array of stored values, e.g. female from optionsToEval map
+	 * @param optionsToEval the options to eval, e.g. a map like {"male": Male, "female": Female}
+	 * @param splitOn the split on. the character with which the storedOptionValOrVals is split
+	 * @return the option list
+	 * @throws Exception the exception
+	 */
 	public List<Option> getOptionList(String storedOptionValOrVals, Map<String, String> optionsToEval, String splitOn) throws Exception {
 
 		return getOptionList(storedOptionValOrVals, optionsToEval, splitOn, null);
 	}
 
+	/**
+	 * Gets the option list.
+	 * 
+	 * @param storedOptionValOrVals The string or string array of stored values, e.g. female from optionsToEval map
+	 * @param optionsToEval the options to eval, e.g. a map like {"male": Male, "female": Female}
+	 * @param splitOn the split on. the character with which the storedOptionValOrVals is split
+	 * @param markupValue the markup value - the markup you want displayed when true, e.g. selected="selected" OR checked
+	 * @return the option list
+	 * @throws Exception the exception
+	 */
 	public List<Option> getOptionList(String storedOptionValOrVals, Map<String, String> optionsToEval, String splitOn, String markupValue) throws Exception {
 
 		options = new ArrayList<Option>();
@@ -70,6 +94,15 @@ public class OptionList implements Serializable {
 		return options;
 	}
 
+	/**
+	 * Gets the option list.
+	 * 
+	 * @param storedOptionValOrVals The string or string array of stored values, e.g. female from optionsToEval map
+	 * @param optionsToEval the options to eval, e.g. a map like {"male": Male, "female": Female}
+	 * @param field the field
+	 * @return the option list
+	 * @throws Exception the exception
+	 */
 	public List<Option> getOptionList(String storedOptionValOrVals, Map<String, String> optionsToEval, Field field) throws Exception {
 		String splitOn = ",";
 		String markupValue = null;
@@ -95,6 +128,14 @@ public class OptionList implements Serializable {
 		return getOptionList(storedOptionValOrVals, optionsToEval, splitOn, markupValue);
 	}
 
+	/**
+	 * Gets the option list.
+	 * 
+	 * @param storedOptionValOrVals The string or string array of stored values, e.g. female from optionsToEval map
+	 * @param field the field - the field annotated with @MustacheOption
+	 * @return the option list
+	 * @throws Exception the exception
+	 */
 	public List<Option> getOptionList(String storedOptionValOrVals, Field field) throws Exception {
 		String splitOn = ",";
 		String markupValue = null;
