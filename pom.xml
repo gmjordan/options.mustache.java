@@ -4,7 +4,7 @@
 	<groupId>com.github.gmjordan.mustache.java</groupId>
 	<artifactId>mustache-java-options</artifactId>
 	<packaging>jar</packaging>
-	<version>0.2.0</version>
+	<version>0.2.0-SNAPSHOT</version>
 	<name>mustache-java-options</name>
 	<description>simple option setup to handle form elements like radio, checkbox and select</description>
 	<url>http://maven.apache.org</url>
