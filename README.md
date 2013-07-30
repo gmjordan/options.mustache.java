@@ -16,3 +16,5 @@ Maven dependency information (ie. for most common cases you will just need the `
 ```
 
 - Download the [mustache-java-options.jar](https://github.com/gmjordan/options.mustache.java/raw/master/target/mustache-java-options.jar) and add to your project.
+
+-TODO: add annotations usage
