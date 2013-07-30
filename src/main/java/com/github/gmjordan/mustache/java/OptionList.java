@@ -51,45 +51,57 @@ public class OptionList implements Serializable {
 	public List<Option> getOptionList(String storedOptionValOrVals, Map<String, String> optionsToEval, String splitOn, String markupValue) throws Exception {
 
 		options = new ArrayList<Option>();
-
-		if ((splitOn == null) || splitOn.isEmpty()) {
-			splitOn = ",";
-		}
-
-		// stored list = this, other
-		List<String> soList = Arrays.asList(storedOptionValOrVals.split(splitOn));
-
-		boolean selected = false;
-
-		if (soList.size() == 1) {
-			storedOptionValOrVals = soList.get(0);
-
-			for (Entry<String, String> entry : optionsToEval.entrySet())
-			{
-				selected = storedOptionValOrVals.equals(entry.getKey());
-
-				if ((markupValue != null) && !markupValue.isEmpty()) {
-					options.add(new Option(entry.getKey(), entry.getValue(), selected, selected ? markupValue : null));
-				} else {
-					options.add(new Option(entry.getKey(), entry.getValue(), selected));
-				}
-
+		
+		// the storedOptionValOrVals have to have some value to compare against 
+		if ((storedOptionValOrVals != null) && !storedOptionValOrVals.isEmpty()) {
+			
+			if ((splitOn == null) || splitOn.isEmpty()) {
+				splitOn = ",";
 			}
 
-		} else {
-			// main list = this, that, other
-			for (Entry<String, String> entry : optionsToEval.entrySet())
-			{
-				selected = soList.contains(entry.getKey());
+			// stored list = this, other
+			List<String> soList = Arrays.asList(storedOptionValOrVals.split(splitOn));
 
-				if ((markupValue != null) && !markupValue.isEmpty()) {
-					options.add(new Option(entry.getKey(), entry.getValue(), selected, selected ? markupValue : null));
-				} else {
-					options.add(new Option(entry.getKey(), entry.getValue(), selected));
+			boolean selected = false;
+
+			if (soList.size() == 1) {
+				storedOptionValOrVals = soList.get(0);
+
+				for (Entry<String, String> entry : optionsToEval.entrySet())
+				{
+					selected = storedOptionValOrVals.equals(entry.getKey());
+
+					if ((markupValue != null) && !markupValue.isEmpty()) {
+						options.add(new Option(entry.getKey(), entry.getValue(), selected, selected ? markupValue : null));
+					} else {
+						options.add(new Option(entry.getKey(), entry.getValue(), selected));
+					}
+
 				}
 
+			} else {
+				// main list = this, that, other
+				for (Entry<String, String> entry : optionsToEval.entrySet())
+				{
+					selected = soList.contains(entry.getKey());
+
+					if ((markupValue != null) && !markupValue.isEmpty()) {
+						options.add(new Option(entry.getKey(), entry.getValue(), selected, selected ? markupValue : null));
+					} else {
+						options.add(new Option(entry.getKey(), entry.getValue(), selected));
+					}
+
+				}
 			}
+		// otherwise just return the list with nothing selected
+		}else{
+			for (Entry<String, String> entry : optionsToEval.entrySet()){
+				options.add(new Option(entry.getKey(), entry.getValue(), false));
+			}
+				
 		}
+
+		
 
 		return options;
 	}
