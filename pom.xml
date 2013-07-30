@@ -19,7 +19,6 @@
 		<jdk.version>1.6</jdk.version>
 	</properties>
 	<build>
-		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

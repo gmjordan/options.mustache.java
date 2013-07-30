@@ -25,6 +25,58 @@ public class OptionList implements Serializable {
 	private ArrayList<Option> options = null;
 
 	/**
+	 * Gets the option list without a selected option.
+	 * 
+	 * @param optionsToReturn the options to return
+	 * @return the option list
+	 * @throws Exception the exception
+	 */
+	public List<Option> getOptionList(Map<String, String> optionsToReturn) throws Exception {
+
+		return getOptionList(null, optionsToReturn, null, null);
+	}
+
+	/**
+	 * Gets the option list without a selected item
+	 * 
+	 * @param field the field
+	 * @return the option list
+	 * @throws Exception the exception
+	 */
+	public List<Option> getOptionList(Field field) throws Exception {
+		String splitOn = ",";
+		String markupValue = null;
+		Map<String, String> optionsToEval = null;
+
+		Field f = field;
+
+		Annotation annotation = f.getAnnotation(MustacheOption.class);
+
+		MustacheOption mustacheOption;
+
+		if (annotation instanceof MustacheOption) {
+			mustacheOption = (MustacheOption) annotation;
+
+			if ((mustacheOption.markupValue() != null) && !mustacheOption.markupValue().isEmpty()) {
+				markupValue = mustacheOption.markupValue();
+			}
+
+			if ((mustacheOption.splitOn() != null) && !mustacheOption.splitOn().isEmpty()) {
+				splitOn = mustacheOption.markupValue();
+			}
+
+			if ((mustacheOption.mustacheOptionKVs() != null) && (mustacheOption.mustacheOptionKVs().length > 0)) {
+				optionsToEval = new HashMap<String, String>();
+				for (MustacheOptionKV kv : mustacheOption.mustacheOptionKVs()) {
+					optionsToEval.put(kv.option(), kv.optionDisplay());
+				}
+			}
+		}
+
+		return getOptionList(null, optionsToEval, splitOn, markupValue);
+	}
+
+	/**
 	 * Gets the option list.
 	 * 
 	 * @param storedOptionValOrVals The string or string array of stored values, e.g. female from optionsToEval map
@@ -51,10 +103,10 @@ public class OptionList implements Serializable {
 	public List<Option> getOptionList(String storedOptionValOrVals, Map<String, String> optionsToEval, String splitOn, String markupValue) throws Exception {
 
 		options = new ArrayList<Option>();
-		
-		// the storedOptionValOrVals have to have some value to compare against 
+
+		// the storedOptionValOrVals have to have some value to compare against
 		if ((storedOptionValOrVals != null) && !storedOptionValOrVals.isEmpty()) {
-			
+
 			if ((splitOn == null) || splitOn.isEmpty()) {
 				splitOn = ",";
 			}
@@ -93,15 +145,13 @@ public class OptionList implements Serializable {
 
 				}
 			}
-		// otherwise just return the list with nothing selected
-		}else{
-			for (Entry<String, String> entry : optionsToEval.entrySet()){
+			// otherwise just return the list with nothing selected
+		} else {
+			for (Entry<String, String> entry : optionsToEval.entrySet()) {
 				options.add(new Option(entry.getKey(), entry.getValue(), false));
 			}
-				
-		}
 
-		
+		}
 
 		return options;
 	}
@@ -180,4 +230,5 @@ public class OptionList implements Serializable {
 
 		return getOptionList(storedOptionValOrVals, optionsToEval, splitOn, markupValue);
 	}
+
 }
