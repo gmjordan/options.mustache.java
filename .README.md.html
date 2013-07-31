@@ -118,6 +118,7 @@ but if you've got a string stored as a csv string, then you could store multiple
 </ul><p>To generate the list for display:</p>
 
 <div class="highlight"><pre><span class="n">OptionList</span> <span class="n">optionList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OptionList</span><span class="o">();</span>
+<span class="o">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="n">HEAD</span>
 <span class="c1">// the "getOptionList" method take the user.getGender() string val and compare it against the map options set in </span>
 <span class="c1">// the mustacheOptionKVs, which is supplied with DeclaredField arugment. </span>
 <span class="c1">// the final argument (the boolean) will sort mustacheOptionKVs by the optionDisplay </span>
@@ -126,6 +127,11 @@ but if you've got a string stored as a csv string, then you could store multiple
     <span class="n">user</span><span class="o">.</span><span class="na">getGender</span><span class="o">(),</span> 
     <span class="n">User</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">"genderOptions"</span><span class="o">),</span> 
     <span class="kc">true</span><span class="o">))</span>
+<span class="o">=======</span>
+<span class="c1">// the "getOptionList" method take the user.getGender() string val and compare it against the map options set in mustacheOptionKVs, which is supplied with DeclaredField arugment. </span>
+<span class="c1">// the final argument (the boolean) will sort mustacheOptionKVs by the __optionDisplay__ using a comparator, if true. otherwise, order is not guaranteed.</span>
+<span class="n">user</span><span class="o">.</span><span class="na">setGenderOptions</span><span class="o">(</span><span class="n">optionList</span><span class="o">.</span><span class="na">getOptionList</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">getGender</span><span class="o">(),</span> <span class="n">User</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">"genderOptions"</span><span class="o">),</span> <span class="kc">true</span><span class="o">))</span>
+<span class="o">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="n">branch</span> <span class="err">'</span><span class="n">master</span><span class="err">'</span> <span class="n">of</span> <span class="nl">https:</span><span class="c1">//github.com/gmjordan/options.mustache.java.git</span>
 </pre></div>
 
 <p>some other methods to generate the OptionList</p>
