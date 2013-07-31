@@ -33,7 +33,7 @@ private String gender;
 		@MustacheOptionKV(option = "male", optionDisplay = "Male"),
 		@MustacheOptionKV(option = "female", optionDisplay = "Female")
 })
-private List<Option> Options;
+private List<Option> genderOptions;
 ```
 
 - @MustacheOption options: 
