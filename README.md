@@ -40,7 +40,7 @@ private List<Option> Options;
  - splitOn -  the character with which the storedOptionValOrVals (e.g. gender property) is split. In most cases, you're going to be storing a single value
 	but if you've got a string stored as a csv string, then you could store multiple vals.  This would work with a select list that allows multiple or for checkboxes
   - markupValue - the string value of the markup you want displayed when true, e.g. selected="selected" OR checked
-   - mustacheOptionKVs - a list of key/value. 
+   - mustacheOptionKVs - array of key/value pairs. 
 
 To generate the list for display:
 
