@@ -92,15 +92,48 @@ function setDocumentScrollTop(ypos)
 <li>Download the <a href="https://github.com/gmjordan/options.mustache.java/raw/master/target/mustache-java-options-1.1.0.jar">mustache-java-options.jar</a> and add to your project.</li>
 </ul><p>Usage:</p>
 
-<div class="highlight"><pre><span class="c1">// mark as transient</span>
+<div class="highlight"><pre>
+<span class="c1">// add the property you are going to persist.</span>
+<span class="kd">private</span> <span class="n">String</span> <span class="n">gender</span><span class="o">;</span>
+
+<span class="c1">// mark the option list as transient</span>
 <span class="nd">@Transient</span>
-<span class="c1">// options:</span>
-<span class="c1">// </span>
 <span class="nd">@MustacheOption</span><span class="o">(</span><span class="n">markupValue</span> <span class="o">=</span> <span class="s">" checked "</span><span class="o">,</span> <span class="n">mustacheOptionKVs</span> <span class="o">=</span> <span class="o">{</span>
         <span class="nd">@MustacheOptionKV</span><span class="o">(</span><span class="n">option</span> <span class="o">=</span> <span class="s">"male"</span><span class="o">,</span> <span class="n">optionDisplay</span> <span class="o">=</span> <span class="s">"Male"</span><span class="o">),</span>
         <span class="nd">@MustacheOptionKV</span><span class="o">(</span><span class="n">option</span> <span class="o">=</span> <span class="s">"female"</span><span class="o">,</span> <span class="n">optionDisplay</span> <span class="o">=</span> <span class="s">"Female"</span><span class="o">)</span>
 <span class="o">})</span>
-<span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Option</span><span class="o">&gt;</span> <span class="n">genderOptions</span><span class="o">;</span>
+<span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Option</span><span class="o">&gt;</span> <span class="n">Options</span><span class="o">;</span>
+</pre></div>
+
+<ul>
+<li>@MustacheOption options: 
+
+<ul>
+<li>splitOn -  the character with which the storedOptionValOrVals (e.g. gender property) is split. In most cases, you're going to be storing a single value
+but if you've got a string stored as a csv string, then you could store multiple vals.  This would work with a select list that allows multiple or for checkboxes</li>
+<li>markupValue - the string value of the markup you want displayed when true, e.g. selected="selected" OR checked</li>
+<li>mustacheOptionKVs - a list of key/value. </li>
+</ul>
+</li>
+</ul><p>To generate the list for display:</p>
+
+<div class="highlight"><pre><span class="n">OptionList</span> <span class="n">optionList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OptionList</span><span class="o">();</span>
+<span class="c1">// the "getOptionList" method take the user.getGender() string val and compare it against the map options set in </span>
+<span class="c1">// the mustacheOptionKVs, which is supplied with DeclaredField arugment. </span>
+<span class="c1">// the final argument (the boolean) will sort mustacheOptionKVs by the optionDisplay </span>
+<span class="c1">// using a comparator, if true. otherwise, order is not guaranteed.</span>
+<span class="n">user</span><span class="o">.</span><span class="na">setGenderOptions</span><span class="o">(</span><span class="n">optionList</span><span class="o">.</span><span class="na">getOptionList</span><span class="o">(</span>
+    <span class="n">user</span><span class="o">.</span><span class="na">getGender</span><span class="o">(),</span> 
+    <span class="n">User</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">"genderOptions"</span><span class="o">),</span> 
+    <span class="kc">true</span><span class="o">))</span>
+</pre></div>
+
+<p>some other methods to generate the OptionList</p>
+
+<div class="highlight"><pre><span class="c1">// using annotations</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Option</span><span class="o">&gt;</span> <span class="nf">getOptionList</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">optionsToReturn</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">sortByOptionDisplay</span><span class="o">)</span>
+
+
 </pre></div>
 </body>
 </html>
