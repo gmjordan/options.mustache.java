@@ -46,17 +46,14 @@ To generate the list for display:
 
 ```java
 OptionList optionList = new OptionList();
-// the "getOptionList" method take the user.getGender() string val and compare it against the map options set in 
-// the mustacheOptionKVs, which is supplied with DeclaredField arugment. 
+// the "getOptionList" method take the user.getGender() string val and compare it against the  
+// map options set in the mustacheOptionKVs, which is supplied with DeclaredField arugment. 
 // the final argument (the boolean) will sort mustacheOptionKVs by the optionDisplay 
 // using a comparator, if true. otherwise, order is not guaranteed.
 user.setGenderOptions(optionList.getOptionList(
 	user.getGender(), 
 	User.class.getDeclaredField("genderOptions"), 
 	true))
-// the "getOptionList" method take the user.getGender() string val and compare it against the map options set in mustacheOptionKVs, which is supplied with DeclaredField arugment. 
-// the final argument (the boolean) will sort mustacheOptionKVs by the __optionDisplay__ using a comparator, if true. otherwise, order is not guaranteed.
-user.setGenderOptions(optionList.getOptionList(user.getGender(), User.class.getDeclaredField("genderOptions"), true))
 ```
 
 some other methods to generate the OptionList
