@@ -22,10 +22,12 @@ Maven dependency information (ie. for most common cases you will just need the `
 Usage:
 
 
-
-
 ```java
-// mark as transient
+
+// add the property you are going to persist.
+private String gender;
+
+// mark the option list as transient
 @Transient
 // options:
 // 
@@ -33,5 +35,5 @@ Usage:
 		@MustacheOptionKV(option = "male", optionDisplay = "Male"),
 		@MustacheOptionKV(option = "female", optionDisplay = "Female")
 })
-private List<Option> genderOptions;
+private List<Option> Options;
 ```
