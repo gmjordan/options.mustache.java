@@ -73,7 +73,7 @@ The markup and mustache look like this:
 <label for="gender">Gender</label>
 {{#user.genderOptions}}
 	<label class="pro-label" for="gender-{{option}}">
-	<input type="radio" id="gender-{{option}}" name="profile.gender" value="{{option}}"  {{markupValue}}/> 
+	<input type="radio" id="gender-{{option}}" name="user.gender" value="{{option}}"  {{markupValue}}/> 
 	{{optionDisplay}}
 	</label>
 {{/user.genderOptions}}
@@ -84,7 +84,7 @@ you could also do the following if you aren't using the markupValue param
 <label for="gender">Gender</label>
 {{#user.genderOptions}}
 	<label class="pro-label" for="gender-{{option}}">
-	<input type="radio" id="gender-{{option}}" name="profile.gender" value="{{option}}"  {{#optionSelected}} checked="checked"  {{/optionSelected}}  /> 
+	<input type="radio" id="gender-{{option}}" name="user.gender" value="{{option}}"  {{#optionSelected}} checked="checked"  {{/optionSelected}}  /> 
 	{{optionDisplay}}
 	</label>
 {{/user.genderOptions}}
