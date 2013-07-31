@@ -5,6 +5,8 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,9 +33,9 @@ public class OptionList implements Serializable {
 	 * @return the option list
 	 * @throws Exception the exception
 	 */
-	public List<Option> getOptionList(Map<String, String> optionsToReturn) throws Exception {
+	public List<Option> getOptionList(Map<String, String> optionsToReturn, boolean sortByOptionDisplay) throws Exception {
 
-		return getOptionList(null, optionsToReturn, null, null);
+		return getOptionList(null, optionsToReturn, null, null, sortByOptionDisplay);
 	}
 
 	/**
@@ -43,7 +45,7 @@ public class OptionList implements Serializable {
 	 * @return the option list
 	 * @throws Exception the exception
 	 */
-	public List<Option> getOptionList(Field field) throws Exception {
+	public List<Option> getOptionList(Field field, boolean sortByOptionDisplay) throws Exception {
 		String splitOn = ",";
 		String markupValue = null;
 		Map<String, String> optionsToEval = null;
@@ -73,7 +75,7 @@ public class OptionList implements Serializable {
 			}
 		}
 
-		return getOptionList(null, optionsToEval, splitOn, markupValue);
+		return getOptionList(null, optionsToEval, splitOn, markupValue, sortByOptionDisplay);
 	}
 
 	/**
@@ -85,9 +87,9 @@ public class OptionList implements Serializable {
 	 * @return the option list
 	 * @throws Exception the exception
 	 */
-	public List<Option> getOptionList(String storedOptionValOrVals, Map<String, String> optionsToEval, String splitOn) throws Exception {
+	public List<Option> getOptionList(String storedOptionValOrVals, Map<String, String> optionsToEval, String splitOn, boolean sortByOptionDisplay) throws Exception {
 
-		return getOptionList(storedOptionValOrVals, optionsToEval, splitOn, null);
+		return getOptionList(storedOptionValOrVals, optionsToEval, splitOn, null, sortByOptionDisplay);
 	}
 
 	/**
@@ -100,7 +102,7 @@ public class OptionList implements Serializable {
 	 * @return the option list
 	 * @throws Exception the exception
 	 */
-	public List<Option> getOptionList(String storedOptionValOrVals, Map<String, String> optionsToEval, String splitOn, String markupValue) throws Exception {
+	public List<Option> getOptionList(String storedOptionValOrVals, Map<String, String> optionsToEval, String splitOn, String markupValue, boolean sortByOptionDisplay) throws Exception {
 
 		options = new ArrayList<Option>();
 
@@ -153,6 +155,20 @@ public class OptionList implements Serializable {
 
 		}
 
+		if (sortByOptionDisplay) {
+			Collections.sort(options, new Comparator<Option>() {
+
+				public int compare(Option option1, Option option2) {
+
+					String label1 = option1.getOptionDisplay().toUpperCase();
+					String label2 = option2.getOptionDisplay().toUpperCase();
+
+					// ascending order
+					return label1.compareTo(label2);
+				}
+			});
+		}
+
 		return options;
 	}
 
@@ -165,7 +181,7 @@ public class OptionList implements Serializable {
 	 * @return the option list
 	 * @throws Exception the exception
 	 */
-	public List<Option> getOptionList(String storedOptionValOrVals, Map<String, String> optionsToEval, Field field) throws Exception {
+	public List<Option> getOptionList(String storedOptionValOrVals, Map<String, String> optionsToEval, Field field, boolean sortByOptionDisplay) throws Exception {
 		String splitOn = ",";
 		String markupValue = null;
 
@@ -187,7 +203,7 @@ public class OptionList implements Serializable {
 			}
 		}
 
-		return getOptionList(storedOptionValOrVals, optionsToEval, splitOn, markupValue);
+		return getOptionList(storedOptionValOrVals, optionsToEval, splitOn, markupValue, sortByOptionDisplay);
 	}
 
 	/**
@@ -198,7 +214,7 @@ public class OptionList implements Serializable {
 	 * @return the option list
 	 * @throws Exception the exception
 	 */
-	public List<Option> getOptionList(String storedOptionValOrVals, Field field) throws Exception {
+	public List<Option> getOptionList(String storedOptionValOrVals, Field field, boolean sortByOptionDisplay) throws Exception {
 		String splitOn = ",";
 		String markupValue = null;
 		Map<String, String> optionsToEval = null;
@@ -228,7 +244,7 @@ public class OptionList implements Serializable {
 			}
 		}
 
-		return getOptionList(storedOptionValOrVals, optionsToEval, splitOn, markupValue);
+		return getOptionList(storedOptionValOrVals, optionsToEval, splitOn, markupValue, sortByOptionDisplay);
 	}
 
 }
