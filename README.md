@@ -29,7 +29,7 @@ private String gender;
 
 // mark the option list as transient
 @Transient
-@MustacheOption(markupValue = " checked ", mustacheOptionKVs = {
+@MustacheOption(markupValue = " checked=\"checked\" ", mustacheOptionKVs = {
 		@MustacheOptionKV(option = "male", optionDisplay = "Male"),
 		@MustacheOptionKV(option = "female", optionDisplay = "Female")
 })
@@ -46,8 +46,9 @@ To generate the list for display:
 
 ```java
 OptionList optionList = new OptionList();
-// the "getOptionList" method take the user.getGender() string val and compare it against the  
-// map options set in the mustacheOptionKVs, which is supplied with DeclaredField arugment. 
+// the "getOptionList" method takes the user.getGender() string val and compares it against the  
+// map options set in the mustacheOptionKVs, which is created using
+// reflection using the DeclaredField arugment. 
 // the final argument (the boolean) will sort mustacheOptionKVs by the optionDisplay 
 // using a comparator, if true. otherwise, order is not guaranteed.
 user.setGenderOptions(optionList.getOptionList(
@@ -56,11 +57,29 @@ user.setGenderOptions(optionList.getOptionList(
 	true))
 ```
 
-some other methods to generate the OptionList
+Another method to generate the OptionList
 
 ```java
-// using annotations
-public List<Option> getOptionList(Map<String, String> optionsToReturn, boolean sortByOptionDisplay)
 
+// providing your own Map, split character, markupvalue. 
+public List<Option> getOptionList(String storedOptionValOrVals, Map<String, String> optionsToEval, String splitOn, String markupValue, boolean sortByOptionDisplay)
+```
 
+There are few more, which you can see when using code insight in your editor.
+
+The markup and mustache look like this:
+
+```html
+<label for="gender">Gender</label>
+{{#user.genderOptions}}
+	<label class="pro-label" for="gender-{{option}}"><input type="radio" id="gender-{{option}}" name="profile.gender" value="{{option}}"  {{markupValue}}/> {{optionDisplay}}</label>
+{{/user.genderOptions}}
+```
+you could also do the following if you aren't using the markupValue param
+
+```html
+<label for="gender">Gender</label>
+{{#user.genderOptions}}
+	<label class="pro-label" for="gender-{{option}}"><input type="radio" id="gender-{{option}}" name="profile.gender" value="{{option}}"  {{#optionSelected}} checked="checked"  {{optionSelected}}  /> {{optionDisplay}}</label>
+{{/user.genderOptions}}
 ```
