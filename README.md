@@ -1,4 +1,4 @@
-options.mustache.java
+{options.mustache.java
 =====================
 
 Steps to include:
@@ -67,13 +67,13 @@ public List<Option> getOptionList(String storedOptionValOrVals, Map<String, Stri
 
 There are few more, which you can see when using code insight in your editor.
 
-The markup and mustache look like this:
+The markup and mustache look like this (NOTE: there's an extra set of mustaches around "markupValue" to output markup).
 
 ```html
 <label for="gender">Gender</label>
 {{#user.genderOptions}}
 	<label class="pro-label" for="gender-{{option}}">
-	<input type="radio" id="gender-{{option}}" name="user.gender" value="{{option}}"  {{markupValue}}/> 
+	<input type="radio" id="gender-{{option}}" name="user.gender" value="{{option}}"  {{{markupValue}}}/> 
 	{{optionDisplay}}
 	</label>
 {{/user.genderOptions}}
