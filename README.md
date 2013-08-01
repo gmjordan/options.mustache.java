@@ -1,4 +1,4 @@
-{options.mustache.java
+options.mustache.java
 =====================
 
 Steps to include:

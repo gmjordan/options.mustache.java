@@ -138,12 +138,12 @@ but if you've got a string stored as a csv string, then you could store multiple
 
 <p>There are few more, which you can see when using code insight in your editor.</p>
 
-<p>The markup and mustache look like this:</p>
+<p>The markup and mustache look like this (NOTE: there's an extra set of mustaches around "markupValue" to output markup).</p>
 
 <div class="highlight"><pre><span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"gender"</span><span class="nt">&gt;</span>Gender<span class="nt">&lt;/label&gt;</span>
 {{#user.genderOptions}}
     <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"pro-label"</span> <span class="na">for=</span><span class="s">"gender-{{option}}"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">id=</span><span class="s">"gender-{{option}}"</span> <span class="na">name=</span><span class="s">"user.gender"</span> <span class="na">value=</span><span class="s">"{{option}}"</span>  <span class="err">{{</span><span class="na">markupValue</span><span class="err">}}</span><span class="nt">/&gt;</span> 
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">id=</span><span class="s">"gender-{{option}}"</span> <span class="na">name=</span><span class="s">"user.gender"</span> <span class="na">value=</span><span class="s">"{{option}}"</span>  <span class="err">{{{</span><span class="na">markupValue</span><span class="err">}}}</span><span class="nt">/&gt;</span> 
     {{optionDisplay}}
     <span class="nt">&lt;/label&gt;</span>
 {{/user.genderOptions}}
